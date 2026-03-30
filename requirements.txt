@@ -1,0 +1,9 @@
+flask
+langgraph
+langchain
+langchain-core
+langchain-openai
+fastmcp
+mcp
+langchain-community
+tavily-python

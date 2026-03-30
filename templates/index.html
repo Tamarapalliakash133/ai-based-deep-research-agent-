@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Research Agent</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f172a, #1e293b, #020617);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.container {
+    width: 60%;
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+.input-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+input {
+    width: 70%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+input::placeholder {
+    color: #cbd5f5;
+}
+
+button {
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(90deg, #6366f1, #22d3ee);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(99,102,241,0.6);
+}
+
+.loader {
+    margin: 20px auto;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top: 4px solid #22d3ee;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.08);
+    text-align: left;
+    line-height: 1.6;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.result-title {
+    margin-bottom: 10px;
+    color: #38bdf8;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #64748b;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>⚡ AI Research Agent</h1>
+    <p class="subtitle">Ask anything. Get intelligent research instantly.</p>
+
+    <form method="POST" onsubmit="showLoader()">
+        <div class="input-box">
+            <input type="text" name="topic" placeholder="Enter topic (e.g. Machine Learning)" required>
+            <button type="submit">Search</button>
+        </div>
+    </form>
+
+    <div class="loader" id="loader"></div>
+
+    {% if result %}
+    <div class="result-box">
+        <h3 class="result-title">📄 Result</h3>
+        <p>{{ result }}</p>
+    </div>
+    {% endif %}
+
+    <footer>Built with Akash with ❤️</footer>
+
+</div>
+
+<script>
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+</script>
+
+</body>
+</html>
