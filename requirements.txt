@@ -8,3 +8,4 @@ mcp
 langchain-community
 tavily-python
 gunicorn
+langchain-mcp-adapters
