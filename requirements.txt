@@ -7,3 +7,4 @@ fastmcp
 mcp
 langchain-community
 tavily-python
+gunicorn
