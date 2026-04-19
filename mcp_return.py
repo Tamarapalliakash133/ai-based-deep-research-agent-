@@ -7,7 +7,7 @@ async def main():
     client = MultiServerMCPClient(
         {
             "akash-mcp": {
-                "url" : "https://your-mcp-server.onrender.com/sse",
+                "url" : os.getenv(MCP_URL),
                 "transport" : "sse",
             }
         }
