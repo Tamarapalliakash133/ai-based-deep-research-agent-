@@ -1,8 +1,6 @@
 from typing_extensions import TypedDict
-from langgraph.graph.message import add_messages
 from langchain_core.messages import AnyMessage
 from model import my_model
-from mcp.server.fastmcp import FastMCP
 from mcp_return import main
 import asyncio
 from langgraph.graph import StateGraph, START, END
@@ -24,6 +22,15 @@ tools2 = None
 binded_model = None
 
 
+def get_event_loop():
+    try:
+        return asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        return loop
+
+
 async def init_tools():
     global tools2, binded_model
     if tools2 is None:
@@ -32,13 +39,17 @@ async def init_tools():
 
 
 def llm_write(state):
-    asyncio.run(init_tools())
+    loop = get_event_loop()
+    loop.run_until_complete(init_tools())
+
     res = binded_model.invoke(state["topic"])
     return {"search_data": res.content}
 
 
 def tavily_data(state):
-    res1 = asyncio.run(
+    loop = get_event_loop()
+
+    res1 = loop.run_until_complete(
         tools2[0].ainvoke({"query": state["topic"]})
     )
     return {"tavily_data": str(res1)}
